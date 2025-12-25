@@ -1,105 +1,53 @@
-# ===============================================
-# Bug Bounty Discord Bot Configuration
-# ===============================================
+import os
+from dotenv import load_dotenv
+
+# Load environment variables from .env file
+load_dotenv()
+
+def get_env(key, default=None):
+    """Get stripped environment variable or default"""
+    val = os.getenv(key, default)
+    if isinstance(val, str):
+        return val.strip()
+    return val
 
 # Discord Bot Token (REQUIRED)
-# Get your token from: https://discord.com/developers/applications
-BOT_TOKEN = "MTQ1MzQ0MTA3NjgxMDc0NDAxNA.GjZ1gr.ISP7LJzlZQ4Fs_yu4lZyCau2QAzNU0gY9tYe48"
+BOT_TOKEN = get_env("BOT_TOKEN")
 
-# ===============================================
 # Bot Settings
-# ===============================================
+COMMAND_PREFIX = get_env("COMMAND_PREFIX", "!")
+BOT_STATUS = get_env("BOT_STATUS", "Bug Bounty Tools")
 
-# Command prefix for legacy commands (if used)
-COMMAND_PREFIX = "!"
-
-# Bot activity status
-BOT_STATUS = "Bug Bounty Tools"
-
-# ===============================================
 # Scan Settings
-# ===============================================
+MAX_CONCURRENT_REQUESTS = int(get_env("MAX_CONCURRENT_REQUESTS", "10"))
+REQUEST_TIMEOUT = int(get_env("REQUEST_TIMEOUT", "30"))
+RATE_LIMIT = int(get_env("RATE_LIMIT", "5"))
 
-# Maximum concurrent requests
-MAX_CONCURRENT_REQUESTS = 10
-
-# Request timeout in seconds
-REQUEST_TIMEOUT = 30
-
-# Rate limiting (requests per second)
-RATE_LIMIT = 5
-
-# ===============================================
 # Logging Settings
-# ===============================================
+DEBUG = get_env("DEBUG", "False").lower() in ("true", "1", "t")
+LOG_FILE = get_env("LOG_FILE", "bot.log")
 
-# Enable debug logging
-DEBUG = False
-
-# Log file path
-LOG_FILE = "bot.log"
-
-# ===============================================
 # Result Settings
-# ===============================================
+RESULTS_DIR = get_env("RESULTS_DIR", "results")
+MAX_RESULTS_DISPLAY = int(get_env("MAX_RESULTS_DISPLAY", "50"))
 
-# Results directory
-RESULTS_DIR = "results"
+# API Keys
+SHODAN_API_KEY = get_env("SHODAN_API_KEY", "")
+VIRUSTOTAL_API_KEY = get_env("VIRUSTOTAL_API_KEY", "")
+SECURITYTRAILS_API_KEY = get_env("SECURITYTRAILS_API_KEY", "")
+CENSYS_API_ID = get_env("CENSYS_API_ID", "")
+CENSYS_API_SECRET = get_env("CENSYS_API_SECRET", "")
 
-# Maximum results to display in Discord
-MAX_RESULTS_DISPLAY = 50
+# Wordlists Paths
+SUBDOMAIN_WORDLIST = get_env("SUBDOMAIN_WORDLIST", "")
+DIRECTORY_WORDLIST = get_env("DIRECTORY_WORDLIST", "")
 
-# ===============================================
-# API Keys (Optional - for enhanced features)
-# ===============================================
-
-# Shodan API Key (for enhanced port scanning)
-SHODAN_API_KEY = "jXGnLrxfCUU1XcRkWdX6oyx0zgPduVdZ"
-
-# VirusTotal API Key (for URL scanning)
-VIRUSTOTAL_API_KEY = "08598622952d30e316f78c464a5c70a18d382aa50148ab9d7dea42b57bdd1d23"
-
-# SecurityTrails API Key (for subdomain enumeration)
-SECURITYTRAILS_API_KEY = "kifuJPHsDJxMfM3_poCFgq5eKOvMmVtH"
-
-# Censys API (for certificate transparency)
-CENSYS_API_ID = "censys_DsnqNHbw_PzWeRmde5Md4aPHi8PwWe85t"
-CENSYS_API_SECRET = "censys_1234567890"
-
-# ===============================================
-# Wordlists Paths (Optional)
-# ===============================================
-
-# Custom subdomain wordlist
-SUBDOMAIN_WORDLIST = ""
-
-# Custom directory wordlist
-DIRECTORY_WORDLIST = ""
-
-# ===============================================
 # Discord Settings
-# ===============================================
+ALLOWED_CHANNELS = get_env("ALLOWED_CHANNELS", "").split(",") if get_env("ALLOWED_CHANNELS") else []
+ALLOWED_ROLES = get_env("ALLOWED_ROLES", "").split(",") if get_env("ALLOWED_ROLES") else []
+ADMIN_USERS = get_env("ADMIN_USERS", "").split(",") if get_env("ADMIN_USERS") else []
 
-# Allowed channels (leave empty for all channels)
-# Example: ["123456789", "987654321"]
-ALLOWED_CHANNELS = []
-
-# Allowed roles (leave empty for all users)
-# Example: ["bug_hunter", "admin"]
-ALLOWED_ROLES = []
-
-# Admin user IDs (for admin-only commands)
-ADMIN_USERS = []
-
-# ===============================================
-# Scan Limits (to prevent abuse)
-# ===============================================
-
-# Maximum domains per scan
-MAX_DOMAINS_PER_SCAN = 100
-
-# Maximum URLs per vulnerability scan
-MAX_URLS_PER_SCAN = 50
-
-# Cooldown between scans (seconds)
-SCAN_COOLDOWN = 5
+# Scan Limits
+MAX_DOMAINS_PER_SCAN = int(get_env("MAX_DOMAINS_PER_SCAN", "100"))
+MAX_URLS_PER_SCAN = int(get_env("MAX_URLS_PER_SCAN", "50"))
+SCAN_COOLDOWN = int(get_env("SCAN_COOLDOWN", "5"))

@@ -1,0 +1,17 @@
+{
+  "tasks": {
+    "scan_1434934613368766654_robinhood.com_1766613232.441356": {
+      "id": "scan_1434934613368766654_robinhood.com_1766613232.441356",
+      "domain": "robinhood.com",
+      "guild_id": 1434934613368766654,
+      "channel_id": 1453497851123335258,
+      "scan_type": "vuln",
+      "interval_minutes": 60,
+      "next_run": "2025-12-25T15:56:54.471967",
+      "created_at": "2025-12-25T03:38:52.441773",
+      "enabled": true,
+      "last_run": "2025-12-25T14:56:54.471967",
+      "last_results": {}
+    }
+  }
+}
