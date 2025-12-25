@@ -1,0 +1,11 @@
+venv/
+__pycache__/
+*.pyc
+bot.log
+results/
+scope_data.json
+autoscans.json
+config.py
+wordlists/default_subdomains.txt
+wordlists/default_directories.txt
+wordlists/default_common.txt

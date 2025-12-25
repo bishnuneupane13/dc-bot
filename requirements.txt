@@ -1,0 +1,31 @@
+# Bug Bounty Discord Bot - Requirements
+# Install with: pip install -r requirements.txt
+
+# Discord
+discord.py>=2.3.0
+
+# HTTP Requests
+aiohttp>=3.9.0
+requests>=2.31.0
+
+# DNS Resolution
+dnspython>=2.4.0
+
+# Async utilities
+asyncio-throttle>=1.0.2
+
+# JSON handling
+ujson>=5.8.0
+
+# For enhanced features (optional)
+beautifulsoup4>=4.12.0
+lxml>=5.0.0
+
+# For screenshot functionality (optional)
+playwright>=1.40.0
+
+# Logging
+colorlog>=6.8.0
+
+# Environment variables (optional)
+python-dotenv>=1.0.0
